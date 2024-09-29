@@ -11,7 +11,7 @@ function App() {
 
   return (
     <div>
-      <h1>Message from Backend:</h1>
+      <h1>Backend:</h1>
       <p>{message}</p>
     </div>
   );
