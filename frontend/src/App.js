@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
+import './App.css'; // Optional: if you want to style your app
 
-function App() {
-  const [message, setMessage] = useState('');
+class App extends Component {
 
-  useEffect(() => {
-    fetch('/api')
-      .then((response) => response.json())
-      .then((data) => setMessage(data.message));
-  }, []);
+constructor(props) {
+    super(props);
+    this.state = { apiResponse: "" };
+}
 
-  return (
-    <div>
-      <h1>Backend:</h1>
-      <p>{message}</p>
-    </div>
-  );
+callAPI() {
+    fetch("http://localhost:9000/test")
+        .then(res => res.text())
+        .then(res => this.setState({ apiResponse: res }));
+}
+
+componentWillMount() {
+    this.callAPI();
+}
+
+  // Render method to display the component's UI
+  render() {
+    return (
+      <div className="App">
+       <p className="App-intro">{this.state.apiResponse}</p>
+      </div>
+    );
+  }
 }
 
 export default App;
